@@ -1,0 +1,21 @@
+# Tested with Python 3.13, numpy 2.5, pandas 3.0, scipy 1.18, scikit-learn 1.9, torch 2.15.
+# Code uses only features available since Python 3.9 / pandas 1.5 / scikit-learn 1.2 (version-aware where needed).
+numpy>=1.24
+pandas>=1.5
+scipy>=1.10
+scikit-learn>=1.2
+statsmodels>=0.14
+pyarrow>=12
+matplotlib>=3.6
+networkx>=3.0
+pyyaml>=6.0
+GEOparse>=2.0.4          # stage 1 (also parses local *_family.soft.gz offline)
+six                      # GEOparse dependency not always pulled in
+requests>=2.28           # stage 7 (Open Targets GraphQL, STRING API)
+gseapy>=1.1              # stage 4 (GSEA prerank, Enrichr library download)
+torch>=2.0               # stage 5/6 deep model
+captum>=0.7              # stage 6 integrated gradients
+shap>=0.44               # stage 6 tree explanations
+
+# R >= 4.3 with Bioconductor: limma, edgeR, affy, hgu133plus2cdf, jsonlite
+#   BiocManager::install(c("limma", "edgeR", "affy", "hgu133plus2cdf"))

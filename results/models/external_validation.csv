@@ -1,0 +1,37 @@
+cohort,tissue,control,model,genes_shared,n_case,n_control,AUROC,CI_low,CI_high
+GSE154926,minor salivary gland,Control,elasticnet,4428,43,7,0.5780730897009967,0.37647840531561466,0.7783750000000002
+GSE154926,minor salivary gland,Control,l2_logreg,4428,43,7,0.5182724252491694,0.2566067653276956,0.7712000322372664
+GSE154926,minor salivary gland,Control,linear_svm,4428,43,7,0.5282392026578073,0.3080357142857143,0.7488787375415282
+GSE154926,minor salivary gland,Control,random_forest,4428,43,7,0.49833887043189373,0.298624584717608,0.705407738095238
+GSE154926,minor salivary gland,Control,grad_boosting,4428,43,7,0.5116279069767442,0.316859126984127,0.7026494565217393
+GSE154926,minor salivary gland,Control,ae_mlp,4428,43,7,0.5083056478405316,0.2692580287929125,0.7391304347826088
+GSE173808,parotid + labial gland (paired),Sicca,elasticnet,4654,75,39,0.7907692307692307,0.7112310606060606,0.8729142931876308
+GSE173808,parotid + labial gland (paired),Sicca,l2_logreg,4654,75,39,0.7866666666666666,0.7014248465961717,0.8669416386083052
+GSE173808,parotid + labial gland (paired),Sicca,linear_svm,4654,75,39,0.7866666666666666,0.7012349731784501,0.8670946176743278
+GSE173808,parotid + labial gland (paired),Sicca,random_forest,4654,75,39,0.7895726495726496,0.707534371670115,0.869782408887468
+GSE173808,parotid + labial gland (paired),Sicca,grad_boosting,4654,75,39,0.7791452991452992,0.6888047774223445,0.8575984827853701
+GSE173808,parotid + labial gland (paired),Sicca,ae_mlp,4654,75,39,0.7876923076923077,0.7019320257801271,0.8685925409061374
+GSE157159,minor salivary gland,Control,elasticnet,4597,9,8,0.9166666666666666,0.7535984848484849,1.0
+GSE157159,minor salivary gland,Control,l2_logreg,4597,9,8,0.9444444444444444,0.795625,1.0
+GSE157159,minor salivary gland,Control,linear_svm,4597,9,8,0.9583333333333333,0.8378571428571429,1.0
+GSE157159,minor salivary gland,Control,random_forest,4597,9,8,0.875,0.6279513888888888,1.0
+GSE157159,minor salivary gland,Control,grad_boosting,4597,9,8,0.8333333333333333,0.5714285714285714,1.0
+GSE157159,minor salivary gland,Control,ae_mlp,4597,9,8,0.9305555555555556,0.7720454545454546,1.0
+GSE23117,minor salivary gland,Control,elasticnet,4917,10,4,0.8500000000000001,0.6134222919937206,1.0
+GSE23117,minor salivary gland,Control,l2_logreg,4917,10,4,1.0,1.0,1.0
+GSE23117,minor salivary gland,Control,linear_svm,4917,10,4,1.0,1.0,1.0
+GSE23117,minor salivary gland,Control,random_forest,4917,10,4,1.0,1.0,1.0
+GSE23117,minor salivary gland,Control,grad_boosting,4917,10,4,1.0,1.0,1.0
+GSE23117,minor salivary gland,Control,ae_mlp,4917,10,4,1.0,1.0,1.0
+GSE40568,labial gland,Control,elasticnet,4838,5,3,1.0,1.0,1.0
+GSE40568,labial gland,Control,l2_logreg,4838,5,3,1.0,1.0,1.0
+GSE40568,labial gland,Control,linear_svm,4838,5,3,0.9333333333333333,0.6056250000000001,1.0
+GSE40568,labial gland,Control,random_forest,4838,5,3,1.0,1.0,1.0
+GSE40568,labial gland,Control,grad_boosting,4838,5,3,1.0,1.0,1.0
+GSE40568,labial gland,Control,ae_mlp,4838,5,3,0.9333333333333333,0.6056250000000001,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,elasticnet,4160,8,6,0.9166666666666666,0.70375,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,l2_logreg,4160,8,6,0.9375,0.7551020408163265,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,linear_svm,4160,8,6,0.9791666666666667,0.8787878787878789,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,random_forest,4160,8,6,0.9166666666666666,0.70375,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,grad_boosting,4160,8,6,0.9375,0.7840277777777778,1.0
+GSE127952,minor salivary gland (low focus score pSS),Control,ae_mlp,4160,8,6,1.0,1.0,1.0

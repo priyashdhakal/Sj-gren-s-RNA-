@@ -1,0 +1,3 @@
+dataset,tissue,n,spearman_deconv_vs_CD45,spearman_marker_score_vs_CD45
+GSE173808,labial gland,55,0.7482953935386515,0.8240196260638483
+GSE173808,parotid gland,56,0.7336877940445221,0.6938942908444915

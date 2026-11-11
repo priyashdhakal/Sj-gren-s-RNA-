@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# DeepMOLFT (late-fusion DNN + SHAP) applied to Sjogren's salivary-gland RNA
+# Paths are relative to this folder. Inputs come from the main pipeline (stage 2 + stage 7 outputs).
+# ---------------------------------------------------------------------------
+seed: 123                          # DeepMOLFT seed
+torch_threads: 4
+
+inputs:
+  pipeline_root: ..                # e:\sjogren_rna_project
+  main_config: ../config.yaml
+  stage2: ../outputs/stage02_preprocess
+  stage3: ../outputs/stage03_diffexpr
+  stage7: ../outputs/stage07_ranking
+
+outputs: outputs
+
+data:
+  cohorts: [GSE40611, GSE154926, GSE173808, GSE157159, GSE23117, GSE40568, GSE127952]
+  min_cohorts_per_gene: 7          # genes measured in every cohort (7,616)
+  within_cohort_zscore: true       # removes platform/scale differences (label-free)
+  top_variable_genes: 3000         # unsupervised pre-filter on TRAINING cohorts (mean within-cohort variance)
+  correlation_threshold: 0.85      # DeepMOLFT: drop one of each |r| > 0.85 pair, fit on training data
+
+# Late-fusion "modalities": gene groups by cell of origin (HPA salivary-gland single-cell reference)
+branches: [immune, gland, broad]
+
+model:                              # DeepMOLFT architecture (model.py)
+  branch_sizes: [128, 64, 32]
+  branch_dropout: [0.5, 0.3, 0.2]
+  l1: 0.001
+  batch_size: 32
+  epochs: 500
+  patience: 50                     # early stopping on validation loss, restore best weights
+  class_balanced: true
+
+optuna:                             # DeepMOLFT search space (main.py objective)
+  n_trials: 30                     # per outer fold (original: 10,000)
+  metric: auroc                    # on the INNER validation split (original: test accuracy)
+  learning_rate: [1.0e-5, 1.0e-1]
+  merged_1_size: [64, 256]
+  merged_2_size: [32, 128]
+  merged_3_size: [16, 64]
+  dropout: [0.1, 0.5]
+
+validation:
+  scheme: leave_one_cohort_out     # every metric is on a cohort never seen in training or tuning
+  inner_val_fraction: 0.2          # stratified, grouped by patient (paired glands stay together)
+  final_seeds: 5                   # final model = 5-seed ensemble (different inner splits)
+  baselines: [elasticnet, random_forest]
+
+shap:
+  background: 100                  # training samples used as the DeepExplainer background
+  explain_output: logit            # additive in log-odds
+  top_n: 50
+  deletion_k: [0, 5, 10, 20, 50, 100]
+  deletion_random: 20

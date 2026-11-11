@@ -1,0 +1,59 @@
+gene,tier,category,evidence_weight,evidence,source,verified
+STAT4,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+IRF5,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+IL12A,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+BLK,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+CXCR5,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+TNIP1,1,GWAS,1.0,genome-wide significant risk locus,"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+HLA-DQA1,1,GWAS,1.0,HLA class II association (strongest signal),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+HLA-DQB1,1,GWAS,1.0,HLA class II association (strongest signal),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+HLA-DRB1,1,GWAS,1.0,HLA class II association (strongest signal),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+TNPO3,1,GWAS,0.5,partner gene within IRF5-TNPO3 / FAM167A-BLK / DDX6-CXCR5 locus (causal gene uncertain),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+FAM167A,1,GWAS,0.5,partner gene within IRF5-TNPO3 / FAM167A-BLK / DDX6-CXCR5 locus (causal gene uncertain),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+DDX6,1,GWAS,0.5,partner gene within IRF5-TNPO3 / FAM167A-BLK / DDX6-CXCR5 locus (causal gene uncertain),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+TYK2,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+CD247,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+TNFAIP3,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+NAB1,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+XKR6,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+SYNGR1,1,GWAS,1.0,genome-wide significant risk locus,"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+PTTG1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+MAPT,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+CRHR1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+RPTOR,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+CHMP6,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+BAIAP2,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+PRDM1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+ATG5,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"Khatri et al. ACR 2020 abstract (GWAS, 10 novel loci)",yes
+TNFSF4,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+IKBKE,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+IKZF1,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+NCF1,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+HIP1,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+ARID5B,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+IRF7,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+OVOL1,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+SH2B3,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+IRF8,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+TMEM86B,1,GWAS,1.0,genome-wide significant risk locus,"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+IDUA,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+SLC26A1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+CLDN23,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+ERI1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+PHRF1,1,GWAS,0.5,locus named by multiple genes (causal gene uncertain),"ACR Convergence 2025 abstract: GWAS meta-analysis, 13 novel loci",yes
+GTF2I,1,GWAS,1.0,susceptibility locus in Han Chinese (P combined 1.3e-53),Zhang et al. Han Chinese GWAS: GTF2I at 7q11.23,yes
+DGKQ,2,GWAS_suggestive,0.5,suggestive association (P<5e-5),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+FCGR2A,2,GWAS_suggestive,0.5,suggestive association (P<5e-5),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+IRAK1BP1,2,GWAS_suggestive,0.5,suggestive association (P<5e-5),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+ITSN2,2,GWAS_suggestive,0.5,suggestive association (P<5e-5),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+PHIP,2,GWAS_suggestive,0.5,suggestive association (P<5e-5),"Lessard et al. 2013 Nat Genet 45:1284 (GWAS, P<5e-8)",yes
+TNFRSF13C,1,therapeutic_target,1.0,"BAFF-R blockade / B-cell depletion (ianalumab, phase 3)",Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+TNFSF13B,1,therapeutic_target,1.0,BAFF/APRIL inhibition (telitacicept; approved in China 2026),Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+TNFSF13,1,therapeutic_target,1.0,BAFF/APRIL inhibition (telitacicept; approved in China 2026),Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+CD40LG,1,therapeutic_target,1.0,"CD40L antagonism (dazodalibep, phase 3 met endpoint)",Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+CD40,1,therapeutic_target,0.75,CD40-CD40L co-stimulation axis (clinical programmes),Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+FCGRT,1,therapeutic_target,1.0,"FcRn blockade (nipocalimab, phase 3)",Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+BTK,2,therapeutic_target,0.75,BTK / JAK inhibitors in development for Sjogren's,Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+JAK1,2,therapeutic_target,0.75,BTK / JAK inhibitors in development for Sjogren's,Healio 2026 / AllSci 2026 / DataMIntelligence 2025 pipeline reviews,yes
+MS4A1,2,therapeutic_target,0.75,CD20 B-cell depletion (rituximab) evaluated in pSS; not an approved indication,general knowledge - verify,no
+CXCL13,2,biomarker,0.5,CXCL13 / ectopic lymphoid structure biomarker in pSS salivary glands,general knowledge - verify,no

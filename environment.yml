@@ -1,0 +1,25 @@
+name: sjogren_RNA
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - statsmodels
+  - pyarrow
+  - matplotlib
+  - networkx
+  - pyyaml
+  - pip
+  - pip:
+      - GEOparse
+      - six
+      - requests
+      - gseapy
+      - torch
+      - captum
+      - shap
+# R (separate install): limma, edgeR, affy, hgu133plus2cdf, jsonlite via BiocManager

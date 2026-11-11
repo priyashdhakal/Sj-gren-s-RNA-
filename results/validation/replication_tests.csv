@@ -1,0 +1,4 @@
+test,observed,null_mean,null_95th,p
+"mean sign-aligned replication-only meta z, top-20 vs random genes",6.5538181485188405,1.4515607651253348,1.9878190370390174,0.0001999600079984003
+top-20: cohorts in the meta direction (mean fraction),1.0,0.5,,
+top-20: replication-only meta FDR<0.05 (count),20.0,,,

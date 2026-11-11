@@ -1,0 +1,29 @@
+# --- data (public, downloaded by stage 1 / cached on first use) ---------------------------
+data/raw/
+data/external/hpa/
+data/external/opentargets/
+data/external/string/
+data/external/genesets/
+
+# --- pipeline outputs (regenerable); curated copies live in results/ and figures/ ---------
+outputs/
+deepmolft_task/outputs/
+deepmolft_task/outputs_quick/
+deepmolft_task/outputs_full_console.log
+deepmolft_task/_upstream_DeepMOLFT/
+
+# --- local only ---------------------------------------------------------------------------
+archive/
+*.pptx
+~$*
+*.parquet
+*.npz
+
+# --- Python / editors / OS ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

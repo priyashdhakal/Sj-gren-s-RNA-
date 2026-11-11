@@ -1,0 +1,254 @@
+# ---------------------------------------------------------------------------
+# Sjogren RNA target-prioritization pipeline: central configuration (v2)
+# All paths are relative to the folder that contains this file.
+# ---------------------------------------------------------------------------
+project:
+  seed: 42
+  n_jobs: 2
+  rscript: auto                     # auto (PATH, then C:/Program Files/R/*) or a full path to Rscript
+
+paths:
+  data_raw: data/raw
+  data_external: data/external
+  outputs: outputs
+
+# ---------------------------------------------------------------------------
+# Datasets: every bulk cohort is salivary-gland tissue (case vs control).
+#   type: microarray_cel     raw CEL files -> RMA (R/affy)
+#         microarray_matrix  processed series-matrix values (scale: mas5 | log2 | log_ratio)
+#         rnaseq_counts      raw gene counts -> TMM + voomWithQualityWeights
+#         rnaseq_tpm         TPM -> log2(TPM + 1), limma-trend
+#         scrna_10x          single-cell gland reference (stage 8)
+# Labels: first matching rule wins; a sample matching no rule is dropped with a log message only when
+# its label is in `drop_labels`, otherwise the run stops.
+# ---------------------------------------------------------------------------
+datasets:
+  GSE40611:
+    type: microarray_cel
+    platform: GPL570
+    tissue: parotid
+    role: discovery
+    case: pSS
+    control: Control
+    extra_contrasts: {pSS_vs_Sicca: [pSS, Sicca]}
+    labels:
+      group_rules:
+        - {field: characteristics, pattern: 'disease status:\s*pSS',     label: pSS}
+        - {field: characteristics, pattern: 'disease status:\s*Sicca',   label: Sicca}
+        - {field: characteristics, pattern: 'disease status:\s*Control', label: Control}
+      batch: {field: characteristics, pattern: 'batch:\s*(\d+)'}
+  GSE154926:
+    type: rnaseq_counts
+    tissue: minor salivary gland
+    role: validation
+    case: pSS
+    control: Control
+    counts_file: GSE154926_Raw_gene_counts_43pSS+7HVs.csv.gz
+    gene_id: ensembl
+    sample_key: title               # count-matrix column == GSM title
+    labels:
+      group_rules:
+        - {field: characteristics, pattern: "diagnosis:\\s*primary Sjogren", label: pSS}
+        - {field: characteristics, pattern: 'diagnosis:\s*Healthy',          label: Control}
+  GSE173808:
+    type: rnaseq_counts
+    tissue: parotid + labial gland (paired)
+    role: validation
+    case: pSS
+    control: Sicca                  # symptomatic non-SS sicca controls
+    counts_file: GSE173808_Raw_gene_counts_matrix.csv.gz
+    gene_id: symbol_column          # column "Symbol"
+    sample_key: title_suffix        # GSM title = "GRCh37ERCC-ensembl75-genes-" + column name
+    covariates: [tissue]
+    block: sjnumber                 # two glands per patient -> duplicateCorrelation
+    measured_infiltration: cd45     # parotid/labial %CD45 by histology, used to check deconvolution
+    labels:
+      group_rules:
+        - {field: characteristics, pattern: 'acr eular:\s*positive', label: pSS}
+        - {field: characteristics, pattern: 'acr eular:\s*negative', label: Sicca}
+  GSE157159:
+    type: rnaseq_tpm
+    tissue: minor salivary gland
+    role: validation
+    case: pSS
+    control: Control
+    counts_file: GSE157159_Sjogrens_Master_TPM_Files.csv.gz
+    gene_id: symbol_index
+    sample_key: title_prefix        # columns "p325_S16" vs GSM title "p325_S19": match on "p325"
+    labels:
+      group_rules:
+        - {field: characteristics, pattern: 'analysis group:\s*Case',    label: pSS}
+        - {field: characteristics, pattern: 'analysis group:\s*Control', label: Control}
+  GSE23117:
+    type: microarray_matrix
+    platform: GPL570
+    scale: mas5
+    tissue: minor salivary gland
+    role: validation
+    case: SS
+    control: Control
+    drop_labels: [Ambiguous]
+    labels:
+      group_rules:
+        - {field: title, pattern: 'non-SS control', label: Control}
+        - {field: title, pattern: 'control gland',  label: Ambiguous}   # "SS gland, control gland, patient 1"
+        - {field: title, pattern: 'SS gland',       label: SS}
+      batch:    {field: title, pattern: 'batch\s*(\d+)'}
+  GSE40568:
+    type: microarray_cel
+    platform: GPL570
+    tissue: labial gland
+    role: validation
+    case: SS
+    control: Control
+    drop_labels: [IgG4RD]
+    labels:
+      group_rules:
+        - {field: title, pattern: 'IgG4',             label: IgG4RD}
+        - {field: title, pattern: 'Sj.gren',          label: SS}
+        - {field: title, pattern: 'healthy volunteer', label: Control}
+  GSE127952:
+    type: microarray_matrix
+    platform: GPL20995
+    scale: log_ratio                # Agilent two-colour log ratios, already normalised
+    symbol_column: GENE_NAME
+    tissue: minor salivary gland (low focus score pSS)
+    role: validation
+    case: pSS
+    control: Control
+    labels:
+      group_rules:
+        - {field: title, pattern: '^pSS', label: pSS}
+        - {field: title, pattern: '^HV',  label: Control}
+  GSE272409:
+    type: scrna_10x
+    tissue: minor salivary gland
+    role: celltype_reference
+    case: SjD
+    control: Sicca
+    labels:
+      group_rules:
+        - {field: title, pattern: '^SjD',      label: SjD}
+        - {field: title, pattern: 'non-SjD',   label: Sicca}
+
+analysis:
+  discovery_dataset: GSE40611
+
+# ---------------------------------------------------------------------------
+# Stage 2: preprocessing
+# ---------------------------------------------------------------------------
+preprocess:
+  log2_offset: 1.0
+  drop_control_probes: true
+  filter:
+    method: gmm                     # arrays: gmm | quantile
+    quantile: 0.25
+    min_samples: smallest_group
+  rnaseq_min_cpm: 1.0               # counts/TPM: CPM (or TPM) >= this in >= smallest-group samples
+  multi_gene_probes: drop
+  collapse_method: max_mean
+  noisy_rle_iqr: auto               # within-stratum RLE IQR above which an array is noisy; auto = median + 3 MAD
+  pca_top_variable: 2000
+  batch_method: auto                # auto = label-free choice (lowest batch read-out, ties -> simplest)
+  batch_candidates: [none, remove_batch_effect, combat]
+
+# ---------------------------------------------------------------------------
+# Deconvolution (stage 3): NNLS against the HPA salivary-gland single-cell reference
+# ---------------------------------------------------------------------------
+deconvolution:
+  reference: hpa_salivary           # data/external/hpa/rna_single_cell_cluster.tsv.zip, tissue "salivary gland"
+  markers_per_type: 50
+  min_specificity: 3.0              # marker = nCPM >= this x the next-highest cell type
+
+# ---------------------------------------------------------------------------
+# Stage 3: differential expression + meta-analysis
+# ---------------------------------------------------------------------------
+de:
+  fdr: 0.05
+  min_abs_lfc: 1.0
+  relaxed_abs_lfc: 0.585
+  array_weights: false             # arrayWeights made GSE40611 anti-conservative under label permutation
+                                    # (32% of genes p<0.05 vs 7% without) -> off; noisy arrays form a sub-batch instead
+  n_permutations: 100
+  meta_min_cohorts: 4               # a gene must be measured in >= this many cohorts for the meta-analysis
+  candidate_meta_fdr: 0.05
+  infiltration_markers_file: cell_type_markers.csv   # marker panel (log-ratio arrays, ML group ablation)
+
+# ---------------------------------------------------------------------------
+# Stage 4: pathways
+# ---------------------------------------------------------------------------
+pathways:
+  online_libraries: [GO_Biological_Process_2023, Reactome_2022, KEGG_2021_Human, MSigDB_Hallmark_2020]
+  min_size: 10
+  max_size: 500
+  gsea_permutations: 1000
+  fdr: 0.05
+  redundancy_jaccard: 0.5
+
+# ---------------------------------------------------------------------------
+# Stage 5/6: modelling and explainability (supporting evidence only)
+# ---------------------------------------------------------------------------
+models:
+  top_variable_genes: 5000
+  outer_splits: 5
+  outer_repeats: 5
+  inner_splits: 3
+  scoring: roc_auc
+  n_permutation_null: 50
+  bootstrap: 1000
+  run: [dummy, elasticnet, l2_logreg, linear_svm, random_forest, grad_boosting, ae_mlp]
+
+explain:
+  top_genes: 30
+  n_random_deletion: 20
+  n_group_null: 10
+  group_sets: [cell_type_markers, coexpression_clusters]
+
+# ---------------------------------------------------------------------------
+# Stage 7: ranking
+#   target    gland-intrinsic, druggable, genetically supported genes; infiltrate markers are penalised
+#   biomarker infiltrate / immune genes allowed, no druggability or safety terms
+# ---------------------------------------------------------------------------
+ranking:
+  mode: target
+  opentargets_disease: MONDO_0010030
+  modes:
+    target:
+      weights:
+        differential_expression: 0.25   # random-effects meta-analysis across gland cohorts
+        gland_intrinsic: 0.20           # survives deconvolution adjustment, not explained by immune content
+        genetics: 0.15                  # Open Targets genetic association + curated GWAS loci
+        tractability: 0.15              # Open Targets tractability (small molecule / antibody / PROTAC)
+        network: 0.10                   # STRING PPI proximity to genetic / clinical pSS genes
+        model_importance: 0.05          # DeepMOLFT SHAP (see model_importance below)
+        safety: 0.10                    # 1 - liabilities (core essential, safety events)
+      infiltrate_penalty: 0.5           # multiply score by (1 - penalty * immune_cell_specificity)
+    biomarker:
+      weights:
+        differential_expression: 0.35
+        gland_intrinsic: 0.0
+        genetics: 0.10
+        tractability: 0.0
+        network: 0.10
+        model_importance: 0.25
+        safety: 0.0
+        cell_type_specificity: 0.20
+      infiltrate_penalty: 0.0
+  model_importance:
+    source: deepmolft               # deepmolft (deepmolft_task/outputs, run it after stage 6) | stage6
+    deepmolft_dir: deepmolft_task/outputs
+    deepmolft_branch_top: 50        # DeepMOLFT top-50 genes per branch join the candidate universe
+    consensus_top: 100              # consensus = pipeline top-100 AND DeepMOLFT branch top-50
+  weight_sensitivity_draws: 1000
+  top_n: 50
+  known_genes_file: pss_known_genes.csv
+
+# ---------------------------------------------------------------------------
+# Stage 8: validation / qPCR
+# ---------------------------------------------------------------------------
+validation:
+  top_n: 20
+  qpcr_panel_size: 10
+  qpcr_reference_genes_to_screen: [GAPDH, ACTB, B2M, HPRT1, TBP, PPIA, RPLP0, UBC, YWHAZ, GUSB, PGK1, RPL13A, PPIB, TFRC, SDHA, HMBS]
+  power: 0.8
+  alpha: 0.05
